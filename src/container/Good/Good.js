@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../All/All.css'
+import { Link } from 'react-router-dom'
 let url = 'https://cnodejs.org/api/v1/topics?tab=good';
 export default class Good extends Component {
     constructor(){
@@ -9,20 +10,32 @@ export default class Good extends Component {
         }
     }
     componentDidMount() {
-        fetch(url,{method:'get'})
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res);
-            this.setState({
-                data:res.data
+        let url = `https://cnodejs.org/api/v1/topics?tab=good&page=${this.props.match.params.page || 1}`;
+        fetch(url, { method: 'get' })
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({
+                    data: res.data
+                })
             })
-        })
+    }
+    componentDidUpdate(p1, p2) {
+        if (this.props.match.params.page !== p1.match.params.page) {
+            let url = `https://cnodejs.org/api/v1/topics?tab=good&page=${this.props.match.params.page || 1}`;
+            fetch(url, { method: 'get' })
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({
+                        data: res.data
+                    })
+                })
+        }
+
     }
     render() {
         let {url} = this.props.match;
-        let str=url.split('/');
-        str[str.length-1]='content';
-        str=str.join('/');
+        console.log(url);
+        let str = url.slice(0,5);
         return (
             <div>
                 <ul>
@@ -36,7 +49,7 @@ export default class Good extends Component {
                                 </div>
                                 <div className='top'>置顶</div>
                                 <span style={{fontSize:'10px',marginRight:'10px',float:'right'}}>三天前</span>
-                                <a className='jump' href={`${str}/${item.id}`}>{item.title}</a>
+                                <Link className='jump' to={`${str}/content/${item.id}`}>{item.title}</Link>
                             </li>)
                     }
                 </ul>
@@ -46,7 +59,7 @@ export default class Good extends Component {
                         {
                             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(((item, index) => {
                                 return <li key={index}>
-                                    <a href={`${url}/${item}`}>{item}</a>
+                                    <Link to={`${str}/good/${item}`}>{item}</Link>
                                 </li>
                             }))
                         }

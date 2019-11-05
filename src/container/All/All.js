@@ -14,13 +14,12 @@ export default class All extends Component {
         fetch(url, { method: 'get' })
             .then((res) => res.json())
             .then((res) => {
-                console.log(res);
                 this.setState({
                     data: res.data
                 })
             })
     }
-    componentWillUpdate(p1, p2) {
+    componentDidUpdate(p1, p2) {
         if (this.props.match.params.page !== p1.match.params.page) {
             let url = `https://cnodejs.org/api/v1/topics?tab=all&page=${this.props.match.params.page || 1}`;
             fetch(url, { method: 'get' })
@@ -36,9 +35,7 @@ export default class All extends Component {
     }
     render() {
         let { url } = this.props.match;
-        let str = url.split('/');
-        str[str.length - 1] = 'content';
-        str = str.join('/');
+        let str = url.slice(0,5);
         return (
             <div>
                 <ul>
@@ -52,7 +49,7 @@ export default class All extends Component {
                                 </div>
                                 <div className='top'>置顶</div>
                                 <span style={{ fontSize: '10px', marginRight: '10px', float: 'right' }}>三天前</span>
-                                <a className='jump' href={`${str}/${item.id}`}>{item.title}</a>
+                                <Link className='jump' to={`${str}/content/${item.id}`}>{item.title}</Link>
                             </li>)
                     }
                 </ul>
@@ -62,7 +59,7 @@ export default class All extends Component {
                         {
                             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(((item, index) => {
                                 return <li key={index}>
-                                    <a href={`${url}/${item}`}>{item}</a>
+                                    <Link to={`${str}/all/${item}`}>{item}</Link>
                                 </li>
                             }))
                         }

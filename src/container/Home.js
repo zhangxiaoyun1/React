@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Route, Redirect, Switch } from 'react-router-dom'
+import { Link,Route, Redirect, Switch } from 'react-router-dom'
 import '../index.css'
 import All from './All/All'
 import Good from './Good/Good'
@@ -45,7 +45,6 @@ export default class Home extends Component {
                         <Route path={`${url}/content/:id`} component={Content} />
                         <Redirect to={`${url}/all`} />
                     </Switch>
-
                 </div>
 
             </div>

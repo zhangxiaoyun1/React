@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Home from './container/Home';
 import Start from './container/Start';
 import About from './container/About';
@@ -9,7 +9,7 @@ import API from './container/API';
 export default class App extends Component {
     render() {
         return (
-            <Router>
+            <Router basename='/React/'>
                 <div>
                     <Header />
                 </div>
@@ -30,7 +30,6 @@ export default class App extends Component {
                     </div>
                 </div>
             </Router>
-
         )
     }
 }
