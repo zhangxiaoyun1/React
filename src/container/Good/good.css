@@ -1,0 +1,34 @@
+li{
+    list-style: none;
+    line-height: 20px;
+    padding: 10px;
+    border-bottom: 0.5px solid rgb(226, 225, 225);
+    overflow: hidden;
+}
+img{
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+}
+a{
+    color: #000;
+}
+.top{
+    display: inline-block;
+    background-color:#80bd01;
+    margin-right: 5px;
+    color: #fff;
+    width: 35px;
+    border-radius: 3px;
+    text-align: center;
+}
+.jump{
+    font-size:16px;
+    font-weight:450;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 670px;
+    float: right;
+}
